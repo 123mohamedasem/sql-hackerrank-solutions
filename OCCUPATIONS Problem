@@ -1,0 +1,41 @@
+with doctor as(
+    select 
+    name,
+    ROW_NUMBER() OVER(order by name)as rn 
+from OCCUPATIONS
+WHERE Occupation  like 'Doctor'
+)
+
+, Professor as(
+     select
+     name,
+     ROW_NUMBER() OVER(order by name)as rn 
+from OCCUPATIONS
+WHERE Occupation  like 'Professor'
+)
+
+, Singer as(
+    select 
+    name,
+    ROW_NUMBER() OVER(order by name)as rn 
+from OCCUPATIONS
+WHERE Occupation  like 'Singer'
+)
+
+, Actor as (
+    select 
+    name,
+    ROW_NUMBER() OVER(order by name)as rn 
+from OCCUPATIONS
+WHERE Occupation  like 'Actor'
+)
+
+select
+       d.name,
+       p.name,
+       s.name,
+       a.name
+from Professor p
+left join doctor d on d.rn=p.rn
+left join Singer s on s.rn=p.rn
+left join Actor a on a.rn=p.rn
