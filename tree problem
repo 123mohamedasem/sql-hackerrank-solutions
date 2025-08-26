@@ -1,0 +1,13 @@
+Root: If node is root node.
+Leaf: If node is leaf node.
+Inner: If node is neither root nor leaf node.
+
+code :
+SELECT N,
+    CASE
+        WHEN P IS NULL THEN 'Root'              
+        WHEN N NOT IN (SELECT P FROM BST WHERE P IS NOT NULL) THEN 'Leaf'  
+        ELSE 'Inner'                    
+    END AS thetree
+FROM BST
+ORDER BY 1;
